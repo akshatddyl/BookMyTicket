@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/tasksdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+  # Updated for newer Spring Boot compatibility
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+  # Kept as fallback for older Jedis/Lettuce dependencies
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  security:
+    user:
+      name: admin
+      password: secret123
+
+logging:
+  level:
+    root: INFO
+    com.distributedjobscheduler: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: true
+    diskspace:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
