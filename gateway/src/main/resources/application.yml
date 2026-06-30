@@ -33,3 +33,12 @@ spring:
 # Must match the same secret used by services for JWT signing
 jwt:
   secret: bXktc3VwZXItc2VjcmV0LWp3dC1rZXktZm9yLWJvb2tteXRpY2tldC1wbGF0Zm9ybS1kZXYtb25seQ==
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

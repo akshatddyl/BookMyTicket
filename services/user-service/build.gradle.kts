@@ -5,6 +5,10 @@ plugins {
 dependencies {
     implementation(project(":shared"))
 
+    // Metrics
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+
     // Security (BCrypt password encoding)
     implementation("org.springframework.boot:spring-boot-starter-security")
 
